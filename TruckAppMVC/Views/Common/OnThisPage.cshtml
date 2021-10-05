@@ -1,0 +1,351 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        Truck App
+    </title>
+    <link rel="icon" href="https://cameraappv3.azurewebsites.net/favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,500;0,700;1,900&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+
+
+<style>
+    * {
+        list-style-type: none;
+        text-decoration: none;
+        margin: 0;
+        padding: 0;
+        transition: all .5s ease-in-out;
+        box-sizing: border-box;
+        font-family: 'Poppins';
+        user-select: none;
+        -webkit-user-drag: none;
+        text-align: center;
+    }
+
+
+    a {
+        text-decoration: underline;
+        color: #030e12;
+        font-size: 16px;
+    }
+
+    body {
+        background: #fff;
+        width: 100%;
+        height: 100vh;
+    }
+
+    .nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        padding: 10px;
+        background: linear-gradient(#f6013e, #f63a01);
+        border: 3px solid #fff;
+        box-shadow: 0px 0px 50px #030e122a,
+            inset 0px 0px 10px #030e122a;
+        margin-bottom: 30px;
+    }
+
+    .nav .fa-angle-left {
+        font-size: 25px;
+        padding: 6px 13px;
+        border-radius: 50%;
+        background-color: #fff;
+        color: #f6013e;
+    }
+
+    .nav .heading {
+        font-weight: 900;
+        font-size: 22px;
+        color: #fff;
+    }
+
+    .help {
+        color: #fff;
+    }
+
+    .cont {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        flex-wrap: wrap;
+    }
+
+    .cont .title {
+        width: 100%;
+    }
+
+    .cont .h2 p {
+        font-size: 25px;
+        font-weight: 900;
+        letter-spacing: 1px;
+        margin-bottom: 20px;
+    }
+
+    .cont .instructions {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .instructions .card {
+        background-color: #fff;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 10px;
+        margin: 20px;
+        cursor: pointer;
+        width: 400px;
+        height: 400px;
+        position: relative;
+        border-radius: 10px;
+        overflow: hidden;
+        border: 3px solid #fff;
+        box-shadow: 0px 0px 50px #030e122a,
+            inset 0px 0px 10px #030e122b;
+    }
+
+    .instructions .card .iimg {
+        min-width: 350px;
+        min-height: 350px;
+    }
+
+    .card .iimg img {
+        width: 350px;
+        height: 350px;
+    }
+
+    .card .badge {
+        position: absolute;
+        top: -0.5%;
+        right: -0.5%;
+        z-index: 2;
+        width: 50px;
+        height: 50px;
+        color: #fff;
+        background: linear-gradient(#01bdf6, #012ef6);
+        padding: 10px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0px 0px 20px #030e123b,
+            inset 0px 0px 10px #030e122a;
+    }
+
+    .card .details {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        background-color: rgba(0, 0, 0, 0.500);
+        color: #fff;
+        border-radius: 10px;
+        transform: scale(0);
+        opacity: 0;
+        transition: .2s ease-in-out;
+    }
+
+    .card .details p {
+        width: 60%;
+        font-weight: 300;
+        transition: .3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+
+    .card .details p:nth-child(1) {
+        color: #fff;
+        font-weight: 900;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+        font-size: 22px;
+        width: 80%;
+        transition: .5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+
+    .card:hover .details {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    @@media (max-width:400px) {
+        .card {
+            transform: scale(0.8);
+            width: 100% !important;
+            height: 350px !important;
+            margin: 0px !important;
+        }
+
+        .iimg {
+            width: 100% !important;
+            height: 100% !important;
+        }
+
+    }
+</style>
+
+<body>
+
+    <div class="nav">
+
+
+        <a href="/home"><i class="fas fa-angle-left"></i></a>
+
+        <p class="heading">Instructions</p>
+
+        <a href="/help" class="help">HELP ?</a>
+
+
+    </div>
+
+
+    <div class="cont">
+
+        <div class="h2">
+            <p>PHOTOS WHEN SEAL IS BROKEN BY CUSTOMS</p>
+        </div>
+
+        <div class="instructions">
+
+            <div class="i1 card">
+
+                <div class="badge">
+                    <p>1</p>
+                </div>
+
+                <div class="details">
+                    <p>Take photo of new customs seal</p>
+                    <p>You can clearly the seal number You can clearly see the seal go through the lock hole</p>
+                </div>
+
+                <div class="i1img iimg">
+                    <img src="https://cameraappv3.azurewebsites.net/assets/images/img-01.png" alt="">
+                </div>
+
+
+
+            </div>
+
+            <div class="i2 card">
+
+                <div class="badge">
+                    <p>2</p>
+                </div>
+
+                <div class="details">
+                    <p>Take photo of Spare seal</p>
+                    <p>You can clearly the seal number You can clearly see the seal go through the lock hole</p>
+                </div>
+
+                <div class="i2img iimg">
+                    <img src="https://cameraappv3.azurewebsites.net/assets/images/img-02.png" alt="">
+                </div>
+
+            </div>
+
+
+            <div class="i3 card">
+
+                <div class="badge">
+                    <p>3</p>
+                </div>
+
+
+                <div class="details">
+                    <p>
+                        Take photo of trailer showing seals and trailer #
+                    </p>
+                    <p>
+                        You can see Spare & Customs seals on the backdoors
+                        You can see trailer # and the license plate
+                    </p>
+                </div>
+
+                <div class="i3img iimg">
+                    <img src="https://cameraappv3.azurewebsites.net/assets/images/img-03.png" alt="">
+                </div>
+
+            </div>
+
+            <div class="i4 card">
+
+                <div class="badge">
+                    <p>4</p>
+                </div>
+
+                <div class="details">
+                    <p>
+                        Take photo of Verification of
+                        Truck Re-Seal (stamped by Customs)
+                    </p>
+                    <p>
+                        Paperwork is eligible
+                        Customs stamp is clearly visible
+                    </p>
+                </div>
+
+                <div class="i4img iimg">
+                    <img src="https://cameraappv3.azurewebsites.net/assets/images/img-04.png" alt="">
+                </div>
+
+            </div>
+
+            <div class="i5 card">
+
+                <div class="badge">
+                    <p>5</p>
+                </div>
+
+                <div class="details">
+                    <p>
+                        Take photo of CMR
+                        (with new seal #s stated)
+                    </p>
+                    <p>
+                        Paperwork is legible
+                        All new seals are stated on CMR
+                    </p>
+                </div>
+
+
+                <div class="i5img iimg">
+                    <img src="https://cameraappv3.azurewebsites.net/assets/images/img-05.png" alt="">
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+</body>
+
+
+<script src="/jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+
+
+</html>

@@ -1,0 +1,232 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        Truck App
+    </title>
+    <link rel="icon" href="https://cameraappv3.azurewebsites.net/favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,500;0,700;1,900&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+
+
+<style>
+    * {
+        list-style-type: none;
+        text-decoration: none;
+        margin: 0;
+        padding: 0;
+        transition: all .1s ease-in-out;
+        box-sizing: border-box;
+        font-family: 'Poppins';
+        user-select: none;
+        -webkit-user-drag: none;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    body {
+        background: #fff;
+        width: 100%;
+        height: 100vh;
+        overflow: hidden;
+    }
+
+    button {
+        transition: .5s;
+    }
+
+    .okbtn:hover,
+    .okbtn2:hover {
+        box-shadow: 0px 0px 5px #fff;
+    }
+
+    .okbtn3:hover {
+        box-shadow: 0px 0px 5px #030e12;
+    }
+
+    .btn1 {
+        padding: 5px;
+        width: 100%;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        background-color: transparent;
+        color: #fff;
+        border: 1px solid #ffff;
+        border-radius: 10px;
+        outline: none;
+        font-weight: 900;
+        font-size: 16px;
+        cursor: pointer;
+        letter-spacing: 1px;
+    }
+
+    .btn1:hover {
+        background-color: #ffff;
+        color: #f6013e;
+        box-shadow: 0px 0px 10px #ffff;
+    }
+
+    .nav {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        filter: blur(2px);
+        box-shadow: 0px 0px 6px #030e125d;
+    }
+
+    .nav .logo img {
+        width: 200px;
+        padding: 10px;
+    }
+
+    .cont {
+        width: 100%;
+        height: 80vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        flex-direction: column;
+    }
+
+    /* alert msg */
+
+    .success {
+        width: 80%;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        padding: 30px;
+        background-color: teal;
+        color: #eff5ff;
+        font-weight: 900;
+        font-size: 18px;
+        box-shadow: 0px 0px 20px #030e123a, inset 0px 0px 10px #030e121a;
+        border: 5px solid #effeff;
+        animation: unlocksuccess 1.5s 0s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+    }
+
+
+    @@keyframes unlocksuccess {
+        0% {
+            margin-bottom: 400px;
+            margin-top: -650px;
+            opacity: 0;
+            display: none;
+        }
+
+        100% {
+            display: flex;
+            opacity: 1;
+        }
+    }
+
+    .msg {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    .msg .fa-check {
+        font-size: 30px;
+        padding: 10px;
+        background-color: #fff;
+        color: teal;
+        border-radius: 50%;
+
+    }
+
+    .msg .sm {
+        font-size: 14px;
+        width: 80%;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        font-weight: 300;
+        text-align: center;
+    }
+
+    .yn {
+        width: 100%;
+    }
+
+    .okbtn2,
+    .okbtn3 {
+        padding: 5px;
+        width: 100%;
+        background-color: transparent;
+        font-size: 20px;
+        border-radius: 10px;
+        border: none;
+        outline: none;
+        font-weight: 500;
+        cursor: pointer;
+        background-color: #fff;
+        letter-spacing: 1px;
+        color: teal;
+        margin-bottom: 10px;
+    }
+
+    .okbtn3 {
+        background-color: #030e12;
+        color: #eff5ff;
+    }
+</style>
+
+<body>
+
+    <div class="nav">
+
+        <div class="logo">
+            <img src="https://cameraappv3.azurewebsites.net/assets/images/logo.png" width="150px">
+        </div>
+
+    </div>
+
+    <div class="cont">
+
+        <div class="success">
+
+            <div class="msg">
+                <i class="fas fa-check"></i>
+                <p class="sm">
+                    This shipment is scheduled for delivery on THIS [<span>@ViewBag.DelDate</span>], is this correct? If this is
+                    not the
+                    correct date, you
+                    have entered the reference# incorrectly. Please try again. If it is the correct reference#, but the
+                    date is wrong,
+                    please contact <a href="sm.bookings@atc-logistics.ie"
+                                      style="color: #eff5ff; text-decoration: underline;">sm.bookings@atc-logistics.ie</a> about the
+                    issue, then continue with your submission.!
+                </p>
+            </div>
+
+
+            <div class="yn">
+                <a href="/home"><button class="okbtn2" type="submit">YES</button></a>
+                <a href="/login"><button class="okbtn3">NO</button></a>
+            </div>
+        </div>
+
+    </div>
+
+
+</body>
+
+<script src="/jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+</html>

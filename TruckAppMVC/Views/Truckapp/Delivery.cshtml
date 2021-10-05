@@ -1,0 +1,1360 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        Truck App
+    </title>
+    <link rel="icon" href="https://cameraappv3.azurewebsites.net/favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,500;0,700;1,900&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+
+
+<style>
+    * {
+        list-style-type: none;
+        text-decoration: none;
+        margin: 0;
+        padding: 0;
+        transition: all .5s ease-in-out;
+        box-sizing: border-box;
+        font-family: 'Poppins';
+        user-select: none;
+        -webkit-user-drag: none;
+        outline: none;
+    }
+
+    ::-webkit-scrollbar {
+        width: 3px;
+        background-color: transparent;
+    }
+
+
+    ::-webkit-scrollbar-thumb {
+        background-color: #000;
+    }
+
+    .stagebtn {
+        width: 100%;
+        text-decoration: none;
+        text-align: center;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 900;
+        color: #030e12;
+        z-index: 1;
+        background-color: transparent;
+        border-radius: 10px;
+        border: none;
+        font-size: 17px;
+    }
+
+    .splbtn {
+        width: 100%;
+        text-decoration: none;
+        text-align: center;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 900;
+        color: #030e12;
+        z-index: 1;
+    }
+
+    body {
+        background: #fff;
+        width: 100%;
+        height: 100vh;
+    }
+
+    button {
+        transition: .5s;
+    }
+
+    .btn1 {
+        padding: 10px;
+        width: 100%;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        background-color: transparent;
+        color: #fff;
+        border: none;
+        border-radius: 10px;
+        outline: none;
+        background-color: #f6013e;
+        font-weight: 900;
+        font-size: 16px;
+        cursor: pointer;
+        letter-spacing: 1px;
+        box-shadow: 0px 0px 5px #f6013e;
+    }
+
+        .btn1:hover {
+            background-color: #170422;
+            color: #f6013e;
+            box-shadow: 0px 0px 5px #170422;
+        }
+
+
+    .btn2 {
+        padding: 10px;
+        width: 100%;
+        background-color: transparent;
+        color: #fff;
+        border: none;
+        border-radius: 10px;
+        outline: none;
+        background-color: #170422;
+        font-weight: 900;
+        font-size: 16px;
+        cursor: pointer;
+        letter-spacing: 1px;
+        box-shadow: 0px 0px 5px #170422;
+    }
+
+        .btn2:hover {
+            color: #f6013e;
+        }
+
+    .otherlayer {
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #030e122a;
+        display: flex;
+        align-items: flex-start;
+        padding-top: 100px;
+        justify-content: center;
+        z-index: -1;
+        display: none;
+        opacity: 0;
+        transition: .3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+
+    .unlocklayer {
+        opacity: 1;
+        z-index: 10;
+        display: flex;
+        transition: .3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        animation: unlocklayer 1s forwards cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+
+    @@keyframes unlocklayer {
+        0% {
+            z-index: -1;
+            display: none;
+            opacity: 0;
+        }
+
+        100% {
+            z-index: 10;
+            display: flex;
+            opacity: 1;
+        }
+    }
+
+    .locklayer {
+        z-index: 10;
+        display: flex;
+        opacity: 1;
+        transition: .3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        animation: locklayer 1s forwards cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+
+    @@keyframes locklayer {
+        0% {
+            z-index: 10;
+            display: flex;
+            opacity: 1;
+        }
+
+        100% {
+            z-index: -1;
+            display: none;
+            opacity: 0;
+        }
+    }
+
+    .otherform {
+        width: 80%;
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        padding: 20px;
+        border: 5px solid #fff;
+        border-radius: 10px;
+        box-shadow: inset 0px 0px 10px #030e122a;
+        background-color: #fff;
+        margin-top: 200px;
+        opacity: 0;
+        transition: .8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+
+    .unlockoform {
+        transition: .8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        animation: unlockoform 1s .1s forwards cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+
+    @@keyframes unlockoform {
+        0% {
+            margin-top: 200px;
+            opacity: 0;
+        }
+
+        100% {
+            margin-top: 0px;
+            opacity: 1;
+        }
+    }
+
+
+    .lockform {
+        transition: .8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        animation: lockform 1s forwards cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+
+    @@keyframes lockform {
+        0% {
+            margin-top: 0px;
+            opacity: 1;
+        }
+
+        100% {
+            margin-top: 300px;
+            opacity: 0;
+        }
+    }
+
+    #otherinpfield {
+        width: 100%;
+        border: none;
+        padding: 10px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        outline: none;
+        font-size: 16px;
+        color: #000;
+        box-shadow: 0px 0px 5px #adadad;
+    }
+
+        #otherinpfield:focus {
+            box-shadow: 0px 0px 5px #f6013e;
+        }
+
+    .help {
+        width: auto;
+        text-decoration: underline;
+        text-align: center;
+        height: auto;
+        font-weight: 300;
+        color: #fff;
+    }
+
+    .heading {
+        color: #fff;
+    }
+
+    .nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        background: linear-gradient(#f6013e, #f63a01);
+        box-shadow: 0px 0px 6px #030e125d, inset 0px 0px 10px #030e122a;
+        border: 5px solid #fff;
+        padding: 10px;
+    }
+
+        .nav .fa-angle-left {
+            font-size: 25px;
+            padding: 6px 13px;
+            border-radius: 50%;
+            background-color: #ffff;
+            color: #f6013e;
+        }
+
+    .heading {
+        font-size: 16px;
+        font-weight: 900;
+        margin-left: 20px;
+    }
+
+
+    .cont {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        flex-direction: column;
+        padding: 10px;
+        text-align: center;
+        position: relative;
+    }
+
+    .optCards {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+        .optCards .stage1,
+        .stage2,
+        .stage3,
+        .stage4,
+        .other {
+            width: 500px;
+            height: 220px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px;
+            position: relative;
+            border-radius: 10px;
+            transition: all .5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            box-shadow: 0px 0px 50px #030e122a, inset 0px 0px 10px #030e121f;
+            background-color: #fff;
+            border: 5px solid #fff;
+        }
+
+            .optCards .stage1::before,
+            .stage2::before,
+            .stage3::before,
+            .stage4::before,
+            .other::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: #170422;
+                clip-path: circle(15% at left 0%);
+                border-radius: 10px;
+                transition: all .5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            }
+
+            .optCards .stage1::before,
+            .stage3::before {
+                background: linear-gradient(#f6013e, #f63a01);
+            }
+
+
+
+            .optCards .stage1::after,
+            .stage2::after,
+            .stage3::after,
+            .stage4::after,
+            .other::after {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(#01bdf6, #012ef6);
+                border-radius: 10px;
+                clip-path: circle(15% at right 100%);
+                transition: all .5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            }
+
+            .optCards .stage1::after,
+            .stage3::after {
+                background: #170422;
+            }
+
+
+            .optCards .stage1:hover::after,
+            .stage2:hover::after,
+            .stage3:hover::after,
+            .stage4:hover::after,
+            .other:hover::after {
+                clip-path: circle(100% at right 100%);
+                transition: all .5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            }
+
+            .optCards .stage1:hover::before,
+            .stage2:hover::before,
+            .stage3:hover::before,
+            .stage4:hover::before,
+            .other:hover::before {
+                clip-path: circle(100% at left 0%);
+                transition: all .5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            }
+
+            .optCards .stage1:hover .stagebtn,
+            .stage2:hover .stagebtn,
+            .stage3:hover .stagebtn,
+            .stage4:hover .stagebtn,
+            .other:hover .stagebtn {
+                color: #fff;
+            }
+
+            .optCards .stage1:hover,
+            .stage2:hover,
+            .stage3:hover,
+            .stage4:hover,
+            .other:hover {
+                transform: scale(1.05);
+            }
+
+    .process {
+        width: 95%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        background-color: #fff;
+        padding: 10px 25px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        border: 5px solid #fff;
+        box-shadow: 0px 0px 50px #030e122a, inset 0px 0px 10px #030e121f;
+        border-radius: 10px;
+        text-align: left;
+        transition: none;
+    }
+
+        .process h2 {
+            margin-top: 15px;
+            margin-bottom: 15px;
+            font-size: 13px;
+            font-weight: 300;
+        }
+
+            .process h2:nth-child(1) {
+                font-size: 22px;
+                letter-spacing: 1px;
+                font-weight: 900;
+                font-size: 22px;
+                text-decoration: underline;
+            }
+
+        .process li {
+            font-size: 16px;
+            font-weight: 300;
+            padding: 5px 0px;
+        }
+
+    .comments {
+        width: 95%;
+        background-color: #fff;
+        padding: 10px 20px;
+        border: 5px solid #fff;
+        box-shadow: 0px 0px 50px #030e122a, inset 0px 0px 10px #030e121f;
+        border-radius: 10px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+        .comments .check {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+            width: 100%;
+        }
+
+    .check textarea {
+        min-width: 100%;
+        min-height: 150px;
+        max-width: 100%;
+        max-height: 150px;
+        outline: 0;
+        border: 0;
+        box-shadow: 0px 0px 5px #030e122a;
+        border-radius: 4px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        padding: 10px;
+        font-size: 16px;
+    }
+
+    textarea::placeholder {
+        color: #adadad;
+    }
+
+    textarea:focus {
+        box-shadow: 0px 0px 5px #f6013e;
+    }
+
+    .cbx {
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+        .cbx label {
+            margin-left: 40px;
+            font-weight: 300;
+            color: #030e12;
+            font-size: 16px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .cbx input[type="checkbox"] {
+            appearance: none;
+        }
+
+        .cbx .labelforcbx::before {
+            content: '';
+            position: absolute;
+            top: 0%;
+            left: -10%;
+            width: 20px;
+            height: 20px;
+            background-color: #fff;
+            border-radius: 3px;
+            border: 2px solid #adadad;
+            transition: all .3s ease-in-out;
+        }
+
+        .cbx input[type="checkbox"]:checked ~ .labelforcbx::before {
+            content: '✔';
+            color: #fff;
+            background-color: #01f60d;
+            border-radius: 3px;
+            border: 2px solid #01f60d;
+            box-shadow: 0px 0px 10px #01f60d;
+        }
+
+
+    /* Alerts */
+
+    .alertlayer,
+    .cbxalertlayer,
+    .cbxsuccesslayer,
+    .netalertlayer {
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #030e122f;
+        display: flex;
+        align-items: flex-start;
+        padding-top: 50px;
+        justify-content: center;
+        z-index: -1;
+        display: none;
+        opacity: 0;
+        transition: .3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+
+        .alertlayer::before,
+        .cbxalertlayer::before,
+        .cbxsuccesslayer::before,
+        .netalertlayer::before {
+            content: '';
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            z-index: 1;
+            top: 0;
+            left: 0;
+        }
+
+    .unlockalertlayer {
+        opacity: 1;
+        z-index: 10;
+        display: flex;
+        transition: .3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        animation: unlockalertlayer 1s forwards cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+
+    @@keyframes unlockalertlayer {
+        0% {
+            z-index: -1;
+            display: none;
+            opacity: 0;
+        }
+
+        100% {
+            z-index: 10;
+            display: flex;
+            opacity: 1;
+        }
+    }
+
+    .lockalertlayer {
+        z-index: 10;
+        display: flex;
+        opacity: 1;
+        transition: .3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        animation: lockalertlayer 1s forwards cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+
+    @@keyframes lockalertlayer {
+        0% {
+            z-index: 10;
+            display: flex;
+            opacity: 1;
+        }
+
+        100% {
+            z-index: -1;
+            display: none;
+            opacity: 0;
+        }
+    }
+
+
+
+
+    .unlockcbxalertlayer {
+        opacity: 1;
+        z-index: 10;
+        display: flex;
+        transition: .3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        animation: unlockcbxalertlayer 1s forwards cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+
+    @@keyframes unlockcbxalertlayer {
+        0% {
+            z-index: -1;
+            display: none;
+            opacity: 0;
+        }
+
+        100% {
+            z-index: 10;
+            display: flex;
+            opacity: 1;
+        }
+    }
+
+    .lockcbxalertlayer {
+        z-index: 10;
+        display: flex;
+        opacity: 1;
+        transition: .3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        animation: lockcbxalertlayer 1s forwards cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+
+    @@keyframes lockcbxalertlayer {
+        0% {
+            z-index: 10;
+            display: flex;
+            opacity: 1;
+        }
+
+        100% {
+            z-index: -1;
+            display: none;
+            opacity: 0;
+        }
+    }
+
+
+    .unlockcbxsuccesslayer {
+        opacity: 1;
+        z-index: 10;
+        display: flex;
+        transition: .3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        animation: unlockcbxsuccesslayer 1s forwards cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+
+    @@keyframes unlockcbxsuccesslayer {
+        0% {
+            z-index: -1;
+            display: none;
+            opacity: 0;
+        }
+
+        100% {
+            z-index: 10;
+            display: flex;
+            opacity: 1;
+        }
+    }
+
+    .lockcbxsuccesslayer {
+        z-index: 10;
+        display: flex;
+        opacity: 1;
+        transition: .3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        animation: lockcbxsuccesslayer 1s forwards cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+
+    @@keyframes lockcbxsuccesslayer {
+        0% {
+            z-index: 10;
+            display: flex;
+            opacity: 1;
+        }
+
+        100% {
+            z-index: -1;
+            display: none;
+            opacity: 0;
+        }
+    }
+
+    .unlocknetalertlayer {
+        opacity: 1;
+        z-index: 10;
+        display: flex;
+        transition: .3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        animation: unlocknetalertlayer 1s forwards cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+
+    @@keyframes unlocknetalertlayer {
+        0% {
+            z-index: -1;
+            display: none;
+            opacity: 0;
+        }
+
+        100% {
+            z-index: 10;
+            display: flex;
+            opacity: 1;
+        }
+    }
+
+    .locknetalertlayer {
+        z-index: 10;
+        display: flex;
+        opacity: 1;
+        transition: .3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        animation: locknetalertlayer 1s forwards cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+
+    @@keyframes locknetalertlayer {
+        0% {
+            z-index: 10;
+            display: flex;
+            opacity: 1;
+        }
+
+        100% {
+            z-index: -1;
+            display: none;
+            opacity: 0;
+        }
+    }
+
+
+    .alert,
+    .cbxalert,
+    .cbxsuccess,
+    .netalert {
+        width: 90%;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        border: 5px solid #fff;
+        border-radius: 10px;
+        z-index: 10;
+        box-shadow: inset 0px 0px 10px #030e122a;
+        background-color: red;
+        margin-top: 200px;
+        opacity: 0;
+        z-index: 999 !important;
+        backdrop-filter: none !important;
+        transition: .8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+
+    .cbxsuccess {
+        flex-direction: column;
+    }
+
+    .suc {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        padding: 10px 20px;
+    }
+
+        .suc .errormsg {
+            text-align: left;
+        }
+
+    .cbxsuccess .splbtn2 {
+        width: 100%;
+        background-color: #fff;
+        color: #01f60d;
+        border: none;
+        padding: 10px;
+        outline: none;
+        cursor: pointer;
+        font-size: 18px;
+        margin-top: 20px;
+        margin-bottom: 10px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px #fff;
+    }
+
+        .cbxsuccess .splbtn2:hover {
+            background-color: #030e12;
+            color: #01f60d;
+            box-shadow: 0px 0px 10px #030e12;
+        }
+
+    .unlockalert {
+        transition: .8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        animation: unlockalert 1s .1s forwards cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+
+    @@keyframes unlockalert {
+        0% {
+            margin-top: 200px;
+            opacity: 0;
+        }
+
+        100% {
+            margin-top: 0px;
+            opacity: 1;
+        }
+    }
+
+
+    .lockalert {
+        transition: .8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        animation: lockalert 1s forwards cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+
+    @@keyframes lockalert {
+        0% {
+            margin-top: 0px;
+            opacity: 1;
+        }
+
+        100% {
+            margin-top: 300px;
+            opacity: 0;
+        }
+    }
+
+
+    .unlockcbxalert {
+        transition: .8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        animation: unlockcbxalert 1s .1s forwards cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+
+    @@keyframes unlockcbxalert {
+        0% {
+            margin-top: 200px;
+            opacity: 0;
+        }
+
+        100% {
+            margin-top: 0px;
+            opacity: 1;
+        }
+    }
+
+
+    .lockcbxalert {
+        transition: .8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        animation: lockcbxalert 1s forwards cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+
+    @@keyframes lockcbxalert {
+        0% {
+            margin-top: 0px;
+            opacity: 1;
+        }
+
+        100% {
+            margin-top: 300px;
+            opacity: 0;
+        }
+    }
+
+    .unlockcbxsuccess {
+        transition: .8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        animation: unlockcbxsuccess 1s .1s forwards cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+
+    @@keyframes unlockcbxsuccess {
+        0% {
+            margin-top: 200px;
+            opacity: 0;
+        }
+
+        100% {
+            margin-top: 0px;
+            opacity: 1;
+        }
+    }
+
+
+    .lockcbxsuccess {
+        transition: .8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        animation: lockcbxsuccess 1s forwards cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+
+    @@keyframes lockcbxsuccess {
+        0% {
+            margin-top: 0px;
+            opacity: 1;
+        }
+
+        100% {
+            margin-top: 300px;
+            opacity: 0;
+        }
+    }
+
+
+    .unlocknetalert {
+        transition: .8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        animation: unlocknetalert 1s .1s forwards cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+
+    @@keyframes unlocknetalert {
+        0% {
+            margin-top: 200px;
+            opacity: 0;
+        }
+
+        100% {
+            margin-top: 0px;
+            opacity: 1;
+        }
+    }
+
+
+    .locknetalert {
+        transition: .8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        animation: locknetalert 1s forwards cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+
+    @@keyframes locknetalert {
+        0% {
+            margin-top: 0px;
+            opacity: 1;
+        }
+
+        100% {
+            margin-top: 300px;
+            opacity: 0;
+        }
+    }
+
+
+
+
+    .alert .errormsg,
+    .cbxalert .errormsg,
+    .netalert .errormsg {
+        font-size: 13px;
+        color: #fff;
+        padding: 10px 40px 10px 10px;
+        text-align: center;
+    }
+
+    .fa-exclamation,
+    .fa-times {
+        padding: 5px;
+        font-size: 20px;
+        color: #000;
+        background-color: #fff;
+    }
+
+    .fa-check {
+        color: rgb(27, 231, 27);
+        background-color: #fff;
+        font-size: 30px;
+        padding: 10px;
+        border-radius: 50%;
+        margin-left: 10px;
+    }
+
+    .successbgc {
+        background-color: rgb(27, 231, 27);
+    }
+
+    .fa-exclamation {
+        font-size: 30px;
+        padding: 10px 20px;
+        border-radius: 50%;
+        margin-left: 10px;
+        color: red;
+    }
+
+    .fa-wifi {
+        font-size: 35px;
+        padding: 10px 20px;
+        border-radius: 50%;
+        margin-left: 10px;
+        color: #fff;
+    }
+
+    .fa-times {
+        position: absolute;
+        right: 0;
+        top: 0;
+        text-align: center;
+        border-radius: 5px;
+        box-shadow: 0px 0px 10px #030e124a;
+        cursor: pointer;
+    }
+
+    /* media queries */
+
+    @@media (max-width:530px) {
+        .cbx .labelforcbx::before {
+            content: '';
+            position: absolute;
+            top: 0%;
+            left: -25%;
+            width: 20px;
+            height: 20px;
+            background-color: #fff;
+            border-radius: 3px;
+            border: 2px solid #adadad;
+            transition: all .3s ease-in-out;
+        }
+    }
+
+
+    .nodisplay {
+        display: none;
+    }
+
+    .blur {
+        filter: blur(2px);
+    }
+</style>
+
+<body>
+
+
+
+    <!-- alerts -->
+
+    <div class="otherlayer">
+
+        <form method="post" action="/delivery/checkStage/others" class="otherform">
+
+            <h2 style="margin-bottom: 20px;">OTHERS SECTION</h2>
+
+            <input type="text" name="otherPic" id="otherinpfield" placeholder="Name of the photo">
+
+            <p style="color: red;"></p>
+
+            <button type="submit" class="btn1" id="ofs">SUBMIT</button>
+
+            <button class="btn2" id="ofc">CANCEL</button>
+
+        </form>
+
+    </div>
+
+
+
+
+    <div class="alertlayer">
+        <div class="alert">
+
+            <div class="i fas fa-exclamation error"></div>
+
+            <p class="errormsg">
+                An image has already been submitted for this stage. Either you have selected the
+                wrong
+                stage
+                or you need to
+                re-submit an image for this stage, in which case you will need to select the photo category ‘other’
+            </p>
+
+            <i class="fas fa-times "></i>
+
+        </div>
+    </div>
+
+    <div class="cbxalertlayer">
+        <div class="cbxalert">
+
+            <div class="i fas fa-exclamation error"></div>
+
+            <p class="errormsg">
+                Please check "I have taken all the photos needed for this stage"
+            </p>
+
+            <i class="fas fa-times "></i>
+
+        </div>
+    </div>
+
+    <div class="netalertlayer">
+        <div class="netalert">
+
+            <div class="i fas fa-wifi error"></div>
+
+            <p class="errormsg"></p>
+
+            <i class="fas fa-times"></i>
+
+        </div>
+    </div>
+
+    <!-- page starts -->
+
+    <div class="nav">
+
+        <a href="/home"><i class="fas fa-angle-left"></i></a>
+
+        <p class="heading">DELIVERY</p>
+
+        <a href="/help" class="help">HELP ?</a>
+
+    </div>
+
+    <div class="cont">
+
+        <div class="process">
+
+            <h2>PROCESS</h2>
+
+            <li>
+                1. Look at the first item on the list below
+            </li>
+            <li>
+                2. Look at examples of good and bad photos <a href="/On-This-Page"
+                                                              style="color: #f6013e; text-decoration: underline;"> on this page</a>
+            </li>
+            <li>
+                3. Take the photo
+            </li>
+            <li>
+                4. Review the photo to ensure it is good. if it's not, delete it and take another photo
+            </li>
+            <li>
+                5. Look at the next item on the list, and repeat the process
+            </li>
+
+            <h2>
+                Here are the list of photos that you need to take for this stage. Take a photo of each of these, one at
+                a time. Please
+                note that you cannot re-do a submission, so you’ll need to check your photos for accuracy and quality
+                before submitting.
+            </h2>
+
+        </div>
+
+
+        <div class="optCards">
+
+            <form method="get" action="/checkSubStage/CMR-PD" class="stage1">
+                <button class="stagebtn" type="submit">
+                    CMR-POST
+                    DELIVERY
+                </button>
+            </form>
+            <div class="other"> <button class="stagebtn">OTHERS</button></div>
+
+        </div>
+
+        <div class="comments">
+
+            <form method="post" action="/Delivery" class="check">
+
+                <div class="cbx">
+                    <input type="checkbox" name="IsCompleted" id="cbx" class="checkbox">
+                    <label for="cbx" class="labelforcbx">
+                        I
+                        have taken all the
+                        photos
+                        needed for this stage
+                    </label>
+                </div>
+
+                <textarea name="Comments" id="comment" cols="30" rows="10" placeholder="Your Comments"
+                          class="cmt"></textarea>
+                <button type="submit" class="btn1" id="submitotherform">SAVE & BACK TO HOME</button>
+            </form>
+
+        </div>
+
+
+    </div>
+
+
+</body>
+<script src="jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+
+<script>
+
+
+    $(document).ready(function () {
+
+
+        $(' .alert > .fa-times').click(function () {
+
+            $('.alertlayer').removeClass('unlockalertlayer')
+            $('.alert').removeClass('unlockalert')
+            $('.alert').addClass('lockalert')
+            $('.alertlayer').addClass('lockalertlayer')
+            $('.nav,.cont').removeClass('blur')
+
+
+        })
+
+        $(' .cbxalert > .fa-times').click(function () {
+
+            $('.cbxalertlayer').removeClass('unlockcbxalertlayer')
+            $('.cbxalert').removeClass('unlockcbxalert')
+            $('.cbxalert').addClass('lockcbxalert')
+            $('.cbxalertlayer').addClass('lockcbxalertlayer')
+            $('.nav,.cont').removeClass('blur')
+
+        })
+
+        $(' .cbxsuccess > .fa-times').click(function () {
+
+            $('.cbxsuccesslayer').removeClass('unlockcbxsuccesslayer')
+            $('.cbxsuccess').removeClass('unlockcbxsuccess')
+            $('.cbxsuccess').addClass('lockcbxsuccess')
+            $('.cbxsuccesslayer').addClass('lockcbxsuccesslayer')
+            $('.nav,.cont').removeClass('blur')
+
+        })
+
+
+
+        $(' .netalert > .fa-times').click(function () {
+
+            $('.netalertlayer').removeClass('unlocknetalertlayer')
+            $('.netalert').removeClass('unlocknetalert')
+            $('.netalert').addClass('locknetalert')
+            $('.netalertlayer').addClass('locknetalertlayer')
+            $('.nav,.cont').removeClass('blur')
+            window.location.reload(true);
+        })
+
+
+
+        $('.other').click(function () {
+
+            $('.otherlayer').addClass('unlocklayer')
+            $('.otherform').addClass('unlockoform')
+            $('.otherform').removeClass('lockform')
+            $('.otherlayer').removeClass('locklayer')
+            $('.nav,.cont').addClass('blur')
+
+
+        })
+
+        $('#ofs').click(function () {
+
+            var otherpicname = $('#otherinpfield').val().trim();
+
+            if (otherpicname.length <= 0) {
+                $('.otherform>p').show()
+
+                $('.otherform > p').html("Please enter the name of the photo.")
+                return false;
+            }
+            else {
+                return true;
+            }
+
+        })
+
+
+        $('#ofc').click(function () {
+
+            $('.otherlayer').addClass('locklayer')
+            $('.otherform').addClass('lockform')
+            $('.otherform').removeClass('unlockoform')
+            $('.otherlayer').removeClass('unlocklayer')
+            $('.nav,.cont').removeClass('blur')
+
+            $('.otherform>p').hide()
+
+            return false;
+        })
+
+        $('#submitotherform').click(function () {
+
+
+            if ($('input[type=checkbox]:checked').length <= 0) {
+
+                $('.nav,.cont').addClass('blur')
+
+                $('.cbxalertlayer').addClass('unlockcbxalertlayer')
+                $('.cbxalert').addClass('unlockcbxalert')
+                $('.cbxalert').removeClass('lockcbxalert')
+                $('.cbxalertlayer').removeClass('lockcbxalertlayer')
+
+                $('.cbxalert').removeClass('successbgc')
+                $('.cbxalert>.error').addClass('fa-exclamation')
+                $('.cbxalert>.error').removeClass('fa-check')
+                $('.cbxalert>.errormsg').html('<h3>Please check "I have taken all the photos needed for this stage"</h3>')
+
+                return false;
+            }
+
+            else {
+                $('.cbxalertlayer').removeClass('unlockcbxalertlayer')
+                $('.cbxalert').removeClass('unlockcbxalert')
+
+                return true;
+
+
+            }
+
+        })
+
+
+
+        // checking online or offline
+
+        $('a,button').click(function () {
+
+            var network = navigator.onLine;
+
+            if (network !== true) {
+
+                $('.netalert').addClass('unlocknetalert')
+                $('.netalertlayer').addClass('unlocknetalertlayer')
+                $('.netalert>.errormsg').html('<h2>Please check your internet connection !</h2>')
+                $('.alertlayer,.cbxalertlayer,.cbxsuccesslayer,.otherlayer').addClass('nodisplay')
+                $('.netalert').removeClass('locknetalert')
+                $('.netalertlayer').removeClass('locknetalertlayer')
+
+                $('.nav,.cont').addClass('blur')
+
+                return false;
+
+            }
+            else {
+                $('.alertlayer,.cbxalertlayer,.cbxsuccesslayer,.otherlayer').removeClass('nodisplay')
+
+                return true;
+            }
+        })
+
+    })
+</script>
+
+</html>

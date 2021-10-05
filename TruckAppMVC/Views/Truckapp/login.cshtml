@@ -1,0 +1,396 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        Truck App
+    </title>
+    <link rel="icon" href="https://cameraappv3.azurewebsites.net/favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,500;0,700;1,900&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+
+
+<style>
+    * {
+        list-style-type: none;
+        text-decoration: none;
+        margin: 0;
+        padding: 0;
+        transition: all .1s ease-in-out;
+        box-sizing: border-box;
+        font-family: 'Poppins';
+        user-select: none;
+        -webkit-user-drag: none;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    body {
+        background: #fff;
+        width: 100%;
+        height: 100vh;
+        overflow: hidden;
+    }
+
+    button {
+        transition: .5s;
+    }
+
+    .okbtn:hover,
+    .okbtn2:hover {
+        box-shadow: 0px 0px 5px #fff;
+    }
+
+    .okbtn3:hover {
+        box-shadow: 0px 0px 5px #030e12;
+    }
+
+    .btn1 {
+        padding: 5px;
+        width: 100%;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        background-color: transparent;
+        color: #fff;
+        border: 1px solid #ffff;
+        border-radius: 10px;
+        outline: none;
+        font-weight: 900;
+        font-size: 16px;
+        cursor: pointer;
+        letter-spacing: 1px;
+    }
+
+    .btn1:hover {
+        background-color: #ffff;
+        color: #f6013e;
+        box-shadow: 0px 0px 10px #ffff;
+    }
+
+    .nav {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        box-shadow: 0px 0px 6px #030e125d;
+    }
+
+    .nav .logo img {
+        width: 200px;
+        padding: 10px;
+    }
+
+    .cont {
+        width: 100%;
+        height: 80vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        flex-direction: column;
+    }
+
+
+    .cont .mainform {
+        width: 80%;
+        padding: 10px 20px;
+        background: linear-gradient(#f6013e, #f63a01);
+        border-radius: 10px;
+        color: #eff5ff;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        box-shadow: 0px 0px 20px #030e123a,
+            inset 0px 0px 10px #030e121a;
+        border: 5px solid #effeff;
+    }
+
+    .cont .pin {
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    .pin input {
+        width: 100%;
+        border: none;
+        padding: 10px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        outline: none;
+        font-size: 16px;
+        transition: .3s ease-in-out;
+    }
+
+    .pin p {
+        font-size: 14px;
+        text-align: center;
+    }
+
+    input:focus {
+        box-shadow: 0px 0px 10px #eff5ff;
+        transition: .3s ease-in-out;
+    }
+
+    /* alert msg */
+
+    .alert {
+        width: 80%;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 15px 10px;
+        margin-top: -450px;
+        display: none;
+        opacity: 0;
+        /* margin-top: 450px; */
+        /* margin-bottom: 200px; */
+        flex-direction: column;
+        background-color: red;
+        color: #eff5ff;
+        font-weight: 900;
+        font-size: 18px;
+        box-shadow: 0px 0px 20px #030e123a,
+            inset 0px 0px 10px #030e121a;
+        border: 5px solid #effeff;
+    }
+
+    .alert .msg {
+        display: flex;
+        text-align: center;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 10px;
+    }
+
+    .fa-exclamation {
+        margin-right: 10px;
+        font-size: 30px;
+        padding: 10px;
+    }
+
+    .okf {
+        width: 100%;
+    }
+
+    .okbtn {
+        padding: 5px;
+        width: 100%;
+        background-color: transparent;
+        color: white;
+        border: 1px solid #fff;
+        font-size: 16px;
+        border-radius: 10px;
+        outline: none;
+        font-weight: 900;
+        cursor: pointer;
+        background-color: transparent;
+        letter-spacing: 1px;
+    }
+
+    .okbtn:hover {
+        background-color: #fff;
+        color: red;
+    }
+
+
+
+
+    .alert.unlockalert {
+        animation: unlockalert 1s cubic-bezier(0.075, 0.82, 0.165, 1) forwards;
+        opacity: 1;
+        display: flex;
+    }
+
+    @@keyframes unlockalert {
+        0% {
+            display: none;
+            margin-bottom: 400px;
+            margin-top: -650px;
+            opacity: 0;
+        }
+
+        100% {
+            display: flex;
+            margin-bottom: 400px;
+            margin-top: 650px;
+            opacity: 1;
+        }
+    }
+
+    .alert.lockalert {
+        animation: lockalert 1s cubic-bezier(0.075, 0.82, 0.165, 1) forwards;
+    }
+
+    @@keyframes lockalert {
+        0% {
+            display: flex;
+            margin-bottom: 400px;
+            margin-top: 450px;
+            opacity: 1;
+        }
+
+        100% {
+            display: none;
+            margin-bottom: 300px;
+            margin-top: -450px;
+            opacity: 0;
+        }
+    }
+
+
+
+
+    .success.visibility {
+        display: none;
+    }
+</style>
+
+<body>
+
+    <div class="nav">
+
+        <div class="logo">
+            <img src="https://cameraappv3.azurewebsites.net/assets/images/logo.png" width="150px">
+        </div>
+
+    </div>
+
+    <div class="cont">
+
+        <div class="alert">
+
+            <div class="msg">
+                <i class="fas fa-exclamation"></i>
+                <p class="am"></p>
+            </div>
+
+
+            <div class="okf">
+                <button class="okbtn">OK</button>
+            </div>
+        </div>
+
+        <form action="/auth" class="mainform">
+
+            <div class="pin">
+                <input type="number" name="referenceNo" id="pin" placeholder="Reference #">
+
+                <p>This should be stated in your Drivers Plan. It starts with ‘6’ or ‘7’</p>
+            </div>
+
+            <button class="btn1" type="submit" id="submit">SUBMIT</button>
+
+        </form>
+
+    </div>
+
+
+</body>
+
+<script src="/jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+
+<script>
+    $(document).ready(function () {
+
+        $('#submit').click(function () {
+
+            let pinnum = $('#pin').val();
+
+            if (pinnum.length <= 0) {
+
+                $('.alert').addClass('unlockalert');
+                $('.alert').removeClass('lockalert')
+                $('.alert>.msg>.am').html('Reference ID required !')
+
+
+                $('.alert > .okf >.okbtn').click(function () {
+                    $('.alert').addClass('lockalert')
+                    $('.alert').removeClass('unlocklockalert')
+
+                })
+
+                return false;
+
+            }
+
+            else if (pinnum.length > 6 || pinnum.length <= 5) {
+                $('.alert').addClass('unlockalert');
+                $('.alert').removeClass('lockalert')
+                $('.alert>.msg>.am').html('This number should be at least 6 digits long')
+
+                $('.alert > .okf >.okbtn').click(function () {
+                    $('.alert').addClass('lockalert')
+                    $('.alert').removeClass('unlocklockalert')
+
+                })
+
+                return false;
+
+            }
+
+            else {
+                return true;
+            }
+
+        })
+
+
+
+        $('a,button').click(function () {
+
+            var network = navigator.onLine;
+
+            if (network !== true) {
+
+                $('.alert').addClass('unlockalert');
+                $('.alert').removeClass('lockalert')
+                $('.alert>.msg>.am').html('Please check your internet connection !')
+
+                $('.success').addClass('visibility');
+
+                $('.alert > .okf >.okbtn').click(function () {
+                    $('.alert').addClass('lockalert')
+                    $('.alert').removeClass('unlocklockalert')
+
+                })
+
+                return false;
+            }
+            else {
+                $('.success').removeClass('visibility');
+                return true;
+            }
+        })
+
+
+
+
+
+
+
+
+    })
+</script>
+
+
+
+</html>

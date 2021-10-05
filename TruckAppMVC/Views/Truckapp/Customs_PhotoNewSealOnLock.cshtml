@@ -1,0 +1,988 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        Truck App
+    </title>
+    <link rel="icon" href="https://cameraappv3.azurewebsites.net/favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,500;0,700;1,900&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+
+
+<style>
+    * {
+        list-style-type: none;
+        text-decoration: none;
+        margin: 0;
+        padding: 0;
+        transition: all .5s ease-in-out;
+        box-sizing: border-box;
+        font-family: 'Poppins';
+        user-select: none;
+        -webkit-user-drag: none;
+        outline: none;
+    }
+
+    body {
+        overflow: hidden;
+    }
+
+    a {
+        text-decoration: underline;
+        color: #eff5ff;
+        text-align: center;
+    }
+
+    .nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        background: linear-gradient(#f6013e, #f63a01);
+        box-shadow: 0px 0px 6px #030e125d, inset 0px 0px 10px #030e122a;
+        border: 5px solid #fff;
+        padding: 10px;
+    }
+
+        .nav .fa-angle-left {
+            font-size: 25px;
+            padding: 6px 13px;
+            border-radius: 50%;
+            background-color: #ffff;
+            color: #f6013e;
+        }
+
+    .heading {
+        font-size: 16px;
+        font-weight: 900;
+        margin-left: 20px;
+        color: #fff;
+        text-align: center;
+    }
+
+    .cont {
+        width: 100%;
+        background-color: #f63a01;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .imgbtns {
+        width: 100%;
+        padding: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: nowrap;
+        position: relative;
+    }
+
+        .imgbtns .takeimg,
+        .selectimg {
+            width: 100%;
+            text-align: center;
+            padding: 8px;
+            color: #fff;
+            border: none;
+            outline: none;
+            border-radius: 10px;
+            font-size: 16px;
+            box-shadow: 0px 0px 40px #030e125d, inset 0px 0px 10px #030e122a;
+            border: 3px solid #fff;
+            margin-left: 10px;
+            margin-right: 10px;
+            cursor: pointer;
+            background-color: #f63a01;
+            font-weight: 900;
+        }
+
+            .imgbtns .takeimg:hover,
+            .selectimg:hover {
+                background: none;
+                background-color: #030e12;
+                box-shadow: 0px 0px 10px #030e12;
+                color: #f63a01;
+            }
+
+        .imgbtns input[type='file'] {
+            display: none;
+        }
+
+    .camera,
+    .camera2 {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #000;
+        object-fit: cover;
+        opacity: 0;
+        transform: scale(0);
+        visibility: hidden;
+    }
+
+    .videocast {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        width: 100%;
+        height: 85%;
+        position: relative;
+    }
+
+        .videocast #camerafield {
+            width: 50%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            object-fit: cover;
+            border: 3px solid #fff;
+        }
+
+        .videocast #picdiv,
+        .imgpreview #picdiv2 {
+            width: 50%;
+            height: 100%;
+            border: 2px solid #fff;
+            background-color: #fff;
+            position: absolute;
+            opacity: 0;
+            transform: scale(0);
+            visibility: hidden;
+            z-index: 5;
+        }
+
+    #picdiv2 img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .camera .title,
+    .camera2 .title {
+        width: 100%;
+        padding: 10px;
+        background: linear-gradient(#f6013e, #f63a01);
+        transition: .1s;
+        font-weight: 900;
+        text-align: center;
+        font-size: 18px;
+        box-shadow: inset 0px 0px 10px #030e126a;
+        border: 3px solid #ffffff;
+        position: relative;
+        margin-bottom: 22.5px;
+        color: #fff;
+    }
+
+    .title .fa-times {
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translate(-0%, -50%);
+        padding: 10px 13px;
+        border-left: 3px solid #fff;
+        font-size: 20px;
+        background-color: transparent;
+        border-radius: 2px;
+        cursor: pointer;
+    }
+
+    .submitbtn {
+        position: fixed;
+        bottom: 2%;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        opacity: 0;
+        padding: 0 10px;
+        transform: scale(0);
+        visibility: hidden;
+    }
+
+        .submitbtn .good,
+        .retake {
+            width: 20%;
+            text-align: center;
+            padding: 6px;
+            color: #fff;
+            border: none;
+            outline: none;
+            border-radius: 6px;
+            font-size: 18px;
+            box-shadow: 0px 0px 40px #030e125d, inset 0px 0px 10px #030e122a;
+            border: 3px solid #fff;
+            margin-left: 10px;
+            margin-right: 10px;
+            cursor: pointer;
+            background-color: #f63a01;
+        }
+
+            .submitbtn .good:hover,
+            .retake:hover {
+                background: none;
+                background-color: #030e12;
+                box-shadow: 0px 0px 10px #030e12;
+                color: #f63a01;
+            }
+
+
+    /* comments */
+
+    .commentslayer .comments,
+    .commentslayer2 .comments {
+        width: 90%;
+        padding: 10px 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0px 0px 40px #030e125d, inset 0px 0px 10px #030e122a;
+        border: 5px solid #fff;
+    }
+
+    textarea {
+        min-width: 100%;
+        min-height: 150px;
+        max-width: 100%;
+        max-height: 150px;
+        outline: 0;
+        border: 0;
+        box-shadow: 0px 0px 5px #030e122a;
+        border-radius: 4px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        padding: 10px;
+        font-size: 16px;
+    }
+
+        textarea::placeholder {
+            color: #adadad;
+        }
+
+        textarea:focus {
+            box-shadow: 0px 0px 5px #f63a01;
+        }
+
+
+    .comments .commentbtn {
+        width: 100%;
+        text-align: center;
+        padding: 10px;
+        color: #fff;
+        border: none;
+        outline: none;
+        border-radius: 10px;
+        font-size: 16px;
+        box-shadow: 0px 0px 40px #030e125d, inset 0px 0px 10px #030e122a;
+        border: 3px solid #fff;
+        margin: 10px;
+        cursor: pointer;
+        background-color: #f63a01;
+    }
+
+        .comments .commentbtn:hover {
+            background: none;
+            background-color: #030e12;
+            box-shadow: 0px 0px 10px #030e12;
+            color: #f63a01;
+        }
+
+    .title2 {
+        width: 100%;
+        color: #030e12;
+        text-align: center;
+        font-size: 18px;
+        font-weight: 900;
+    }
+
+
+    /* layer */
+
+    .commentslayer,
+    .commentslayer2 {
+        width: 100%;
+        height: 100vh;
+        position: fixed;
+        top: 0%;
+        left: 0%;
+        background-color: #030e124f;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        visibility: hidden;
+        transform: scale(0);
+        opacity: 0;
+        transition: .6s ease-in-out;
+    }
+
+    .fa-camera {
+        color: #000;
+        position: absolute;
+        bottom: 3%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 30px;
+        border-radius: 10px;
+        background-color: #fff;
+        padding: 10px;
+        cursor: pointer;
+        box-shadow: 0px 0px 40px #030e125d, inset 0px 0px 10px #030e122a;
+        border: 3px solid #fff;
+    }
+
+    #picdiv.popup,
+    #picdiv2.popup,
+    .popup {
+        opacity: 1;
+        transform: scale(1);
+        visibility: visible;
+        z-index: 5;
+    }
+
+    .commentslayer.popup,
+    .commentslayer2.popup {
+        opacity: 1;
+        transform: scale(1);
+        visibility: visible;
+        z-index: 10;
+    }
+
+    .cbxsuccesslayer.popup {
+        opacity: 1;
+        transform: scale(1);
+        visibility: visible;
+        z-index: 99;
+    }
+
+
+    .cbxsuccesslayer {
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        top: 0%;
+        left: 0%;
+        background-color: #030e124f;
+        display: flex;
+        align-items: flex-start;
+        padding-top: 50px;
+        justify-content: center;
+        z-index: -1;
+        visibility: hidden;
+        transform: scale(0);
+        opacity: 0;
+        transition: .6s ease-in-out;
+    }
+
+    .cbxsuccess {
+        width: 90%;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        padding: 20px;
+        border: 5px solid #fff;
+        border-radius: 10px;
+        box-shadow: inset 0px 0px 10px #030e122a;
+        background-color: #01f60d;
+        z-index: 99 !important;
+        backdrop-filter: none !important;
+        transition: .6s ease-in-out;
+    }
+
+    .suc {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        padding: 10px 20px;
+    }
+
+        .suc .errormsg {
+            text-align: left;
+        }
+
+    .fa-check {
+        color: rgb(27, 231, 27);
+        background-color: #fff;
+        font-size: 30px;
+        padding: 10px;
+        border-radius: 50%;
+        margin-left: 10px;
+    }
+
+    .cbxsuccess .splbtn2,
+    .splbtn3 {
+        width: 100%;
+        background-color: #fff;
+        color: #01f60d;
+        border: none;
+        padding: 10px;
+        outline: none;
+        cursor: pointer;
+        font-size: 18px;
+        margin-top: 20px;
+        margin-bottom: 10px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px #fff;
+    }
+
+        .cbxsuccess .splbtn2:hover {
+            background-color: #030e12;
+            color: #01f60d;
+            box-shadow: 0px 0px 10px #030e12;
+        }
+
+    .splbtn3 {
+        color: red;
+        background-color: #fff;
+    }
+
+    @@media (max-width:900px) {
+
+        .submitbtn .good,
+        .retake {
+            width: 50%;
+        }
+
+        .title {
+            margin-bottom: 0 !important;
+        }
+
+        .videocast {
+            width: 100%;
+            height: 100%;
+        }
+
+            .videocast #camerafield {
+                width: 100% !important;
+                height: 100% !important;
+            }
+
+            .videocast canvas {
+                min-width: 100% !important;
+                height: 100% !important;
+                object-fit: cover !important;
+                border: 3px solid;
+                background-color: #fff;
+                position: absolute;
+                opacity: 0;
+                transform: scale(0);
+                visibility: hidden;
+                z-index: 5;
+            }
+
+        #picdiv2 {
+            width: 100% !important;
+        }
+
+            #picdiv2 img {
+                min-height: 85% !important;
+                min-width: 100% !important;
+            }
+    }
+
+    canvas img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .imgfields span {
+        font-style: italic;
+        color: #afafaf;
+        font-family: sans-serif;
+        font-size: 12px;
+        position: absolute;
+        left: 5%;
+        bottom: -50%;
+    }
+
+
+    /* Alerts */
+    .alert {
+        width: 90%;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        padding: 20px;
+        border: 5px solid #fff;
+        border-radius: 10px;
+        z-index: 10;
+        box-shadow: inset 0px 0px 10px #030e122a;
+        background-color: red;
+        margin-top: 200px;
+        opacity: 0;
+        text-align: center;
+        z-index: 999 !important;
+        backdrop-filter: none !important;
+        transition: .8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+
+    .unlockalert {
+        transition: .8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        animation: unlockalert 1s .1s forwards cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+
+    @@keyframes unlockalert {
+        0% {
+            margin-top: 200px;
+            opacity: 0;
+        }
+
+        100% {
+            margin-top: 0px;
+            opacity: 1;
+        }
+    }
+
+
+    .lockalert {
+        transition: .8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        animation: lockalert 1s forwards cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+
+    @@keyframes lockalert {
+        0% {
+            margin-top: 0px;
+            opacity: 1;
+        }
+
+        100% {
+            margin-top: 300px;
+            opacity: 0;
+        }
+    }
+
+
+    .alert .errormsg {
+        font-size: 13px;
+        color: #fff;
+        padding: 10px 40px 10px 10px;
+        text-align: center;
+    }
+
+    .alert .fa-wifi,
+    .fa-times {
+        padding: 5px;
+        font-size: 20px;
+        color: #fff;
+        background-color: #fff;
+        border-top-right-radius: 3px;
+        cursor: pointer;
+    }
+
+    .alert .fa-check {
+        color: rgb(27, 231, 27);
+        background-color: #fff;
+        font-size: 30px;
+        padding: 10px;
+        border-radius: 50%;
+        margin-left: 10px;
+    }
+
+    .successbgc {
+        background-color: rgb(27, 231, 27);
+    }
+
+    .alert .fa-wifi {
+        font-size: 30px;
+        padding: 10px 8px;
+        border-radius: 50%;
+        margin-left: 10px;
+        color: red;
+    }
+
+    .alertlayer {
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #030e124f;
+        display: flex;
+        align-items: flex-start;
+        padding-top: 50px;
+        justify-content: center;
+        z-index: -1;
+        display: none;
+        opacity: 0;
+        transition: .3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+
+    .unlockalertlayer {
+        opacity: 1;
+        z-index: 10;
+        display: flex;
+        transition: .3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        animation: unlockalertlayer 1s forwards cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+
+    @@keyframes unlockalertlayer {
+        0% {
+            z-index: -1;
+            display: none;
+            opacity: 0;
+        }
+
+        100% {
+            z-index: 10;
+            display: flex;
+            opacity: 1;
+        }
+    }
+
+    .lockalertlayer {
+        z-index: 10;
+        display: flex;
+        opacity: 1;
+        transition: .3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        animation: lockalertlayer 1s forwards cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+
+    @@keyframes lockalertlayer {
+        0% {
+            z-index: 10;
+            display: flex;
+            opacity: 1;
+        }
+
+        100% {
+            z-index: -1;
+            display: none;
+            opacity: 0;
+        }
+    }
+
+    .nav.blur,
+    .camera.blur,
+    .imgbtns.blur {
+        filter: blur(2px);
+    }
+
+    .imgfields {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        width: 100%;
+    }
+
+    .imgpreview #picdiv2 {
+        height: 85%;
+    }
+
+    .camera2 .imgpreview {
+        width: 100%;
+        height: 85%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+
+    #inp,
+    #inp2 {
+        display: none;
+    }
+</style>
+
+<body>
+
+    <!-- Alerts -->
+
+    <div class="alertlayer">
+
+        <div class="alert">
+
+            <div class="i fas fa-wifi error"></div>
+
+            <p class="errormsg"></p>
+
+            <button class="splbtn3">Okay</button>
+
+        </div>
+    </div>
+
+    <div class="nav">
+
+        <a href="/home"><i class="fas fa-angle-left"></i></a>
+
+        <p class="heading">PHOTO-NEW SEALS ON LOCK</p>
+
+        <a href="/help" class="help">HELP ?</a>
+
+    </div>
+
+    <div class="imgfields">
+
+        <span></span>
+
+        <form method="post" action="/Photo-New-Seals-On-Lock/take-photo" class="imgbtns">
+
+            <div class="takeimg">TAKE IMAGE</div>
+
+            <div class="commentslayer">
+
+                <div class="comments">
+
+                    <div class="title2">
+                        YOUR COMMENTS
+                    </div>
+
+                    <textarea name="comment" id="comment" cols="30" rows="10" placeholder="(Optional)"
+                              class="cmt"></textarea>
+
+                    <button class="commentbtn" type="submit">SUBMIT</button>
+
+                </div>
+            </div>
+            <input type="text" name="File" id="inp" readonly>
+        </form>
+
+        <form method="post" action="/Photo-New-Seals-On-Lock/select-photo" enctype="multipart/form-data" class="imgbtns">
+
+            <input type="file" name="ImageName" id="file">
+            <label for="file" class="selectimg">SELECT IMAGE</label>
+
+
+            <div class="commentslayer2">
+
+                <div class="comments">
+
+                    <div class="title">
+                        YOUR COMMENTS
+                    </div>
+
+                    <textarea name="comment2" id="comment" cols="30" rows="10" placeholder="(Optional)"
+                              class="cmt"></textarea>
+
+                    <button class="commentbtn" type="submit">SUBMIT</button>
+                </div>
+            </div>
+            <input type="text" name="Image" id="inp2" readonly>
+        </form>
+    </div>
+
+    <div class="camera">
+
+        <div class="title">
+            <span>TAKE PHOTO</span>
+
+            <i class="fas fa-times"></i>
+
+        </div>
+
+        <div class="videocast">
+            <video autoplay playsinline id="camerafield"></video>
+            <canvas id="picdiv">
+            </canvas>
+        </div>
+
+        <i class="fas fa-camera capture"></i>
+
+        <div class=" submitbtn">
+            <button class="good">It's Good !</button>
+            <button class=" retake">Retake</button>
+        </div>
+
+    </div>
+
+
+    <div class="camera2">
+
+        <div class="title">
+            <span>SELECT PHOTO</span>
+
+            <i class="fas fa-times"></i>
+
+        </div>
+
+        <div class="imgpreview">
+            <div id="picdiv2"></div>
+        </div>
+
+        <div class=" submitbtn">
+            <button class="good">It's Good !</button>
+            <button class=" retake">Retake</button>
+        </div>
+
+    </div>
+
+
+
+
+
+
+</body>
+
+<script src="/jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://unpkg.com/webcam-easy@1.0.5/dist/webcam-easy.min.js"></script>
+
+<script>
+
+
+
+    $('.takeimg').click(function camerafunc() {
+
+        const picelement = document.getElementById('camerafield');
+
+        const picdiv = document.getElementById('picdiv');
+
+        const webcam = new Webcam(picelement, "user", picdiv);
+
+        $('.camera').addClass('popup');
+
+        webcam.start();
+
+        $('.capture').click(function () {
+
+            var picture = webcam.snap();
+
+            $('#inp').attr("value", picture);
+
+            $('#picdiv').addClass('popup');
+
+            $('.submitbtn').addClass('popup')
+
+            webcam.stop();
+        })
+
+
+
+        $('.retake').click(function () {
+
+            $('#picdiv').removeClass('popup');
+
+            $('.submitbtn').removeClass('popup')
+
+            webcam.start();
+        })
+
+        $('.good').click(function () {
+            $('.commentslayer').addClass('popup')
+            webcam.stop();
+
+        })
+
+        $('.commentbtn').click(function () {
+
+            $('.camera').removeClass('popup')
+            $('.commentslayer').removeClass('popup')
+            webcam.stop();
+
+        })
+
+        $('.title>.fa-times').click(function () {
+
+            $('.camera').removeClass('popup')
+
+            webcam.stop();
+
+            window.location.reload(true)
+
+        })
+
+
+    })
+
+
+
+
+    $('.alert>.splbtn3').click(function () {
+
+        window.location.reload(true)
+
+    })
+
+
+    $('#file').on('change', function (image) {
+
+        var img = image.target.files[0];
+        var reader = new FileReader();
+
+        reader.onloadend = function () {
+
+            $('.camera2').addClass('popup')
+            $('#picdiv2').addClass('popup');
+            $('.camera2>.submitbtn').addClass('popup');
+            $('#picdiv2').html("<img src='" + reader.result + "'></img>");
+            $('#inp2').attr("value", reader.result);
+
+        }
+
+        reader.readAsDataURL(img);
+
+        $('.camera2>.title>.fa-times').click(function () {
+
+            $('.camera2').removeClass('popup')
+
+            window.location.reload(true)
+
+        })
+
+
+        $('.camera2>.submitbtn>.retake').click(function () {
+
+            $('.camera2').removeClass('popup')
+
+            window.location.reload(true)
+        })
+
+
+        $('.camera2>.submitbtn>.good').click(function () {
+            $('.commentslayer2').addClass('popup')
+
+        })
+
+
+    })
+
+
+    $('a,button,input').click(function () {
+
+        var network = navigator.onLine;
+
+        if (network !== true) {
+            $('.alert').addClass('unlockalert')
+            $('.alertlayer').addClass('unlockalertlayer')
+            $('.alertlayer').removeClass('lockalertlayer')
+            $('.alert').removeClass('lockalert')
+            $('.alert>.errormsg').html('<h2>Please check your internet connection !"</h2>')
+            $('.nav,.camera,.imgbtns').addClass('blur');
+
+            return false;
+
+        }
+        else {
+            return true;
+        }
+    })
+
+
+
+
+
+
+</script>
+
+</html>

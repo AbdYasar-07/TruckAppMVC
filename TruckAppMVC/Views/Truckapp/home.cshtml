@@ -1,0 +1,550 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        Truck App - HOME
+    </title>
+    <link rel="icon" href="https://cameraappv3.azurewebsites.net/favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,500;0,700;1,900&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+
+
+<style>
+    * {
+        list-style-type: none;
+        text-decoration: none;
+        margin: 0;
+        padding: 0;
+        transition: all .5s ease-in-out;
+        box-sizing: border-box;
+        font-family: 'Poppins';
+        user-select: none;
+        -webkit-user-drag: none;
+    }
+
+    ::-webkit-scrollbar {
+        width: 3px;
+        background-color: transparent;
+    }
+
+
+    ::-webkit-scrollbar-thumb {
+        background-color:#000;
+    }
+
+
+
+    .stagebtn {
+        width: 100%;
+        text-decoration: none;
+        text-align: center;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 900;
+        color: #030e12;
+        z-index: 1;
+        background-color: transparent;
+        border-radius: 10px;
+        border: none;
+        font-size: 17px;
+    }
+
+    body {
+        background: #fff;
+        width: 100%;
+        height: 100vh;
+    }
+
+    button {
+        transition: .5s;
+    }
+
+    .btn1 {
+        padding: 10px;
+        width: 100%;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        background-color: transparent;
+        color: #f6013e;
+        border: none;
+        border-radius: 10px;
+        outline: none;
+        background-color: #030e12;
+        font-weight: 900;
+        font-size: 16px;
+        cursor: pointer;
+        letter-spacing: 1px;
+        box-shadow: 0px 0px 5px #030e12;
+    }
+
+
+    .nav {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        background-color: #fff;
+        box-shadow: 0px 0px 6px #030e125d, inset 0px 0px 10px #030e122a;
+        border: 5px solid #fff;
+    }
+
+        .nav .logo img {
+            width: 200px;
+            padding: 10px;
+        }
+
+    .cont {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        flex-direction: column;
+        padding: 10px;
+        text-align: center;
+        position: relative;
+    }
+
+        .cont::before {
+            content: '';
+            background: linear-gradient(#f6013e, #f63a01);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 10%;
+            border-bottom-left-radius: 50%;
+            border-bottom-right-radius: 50%;
+            z-index: -1;
+        }
+
+        .cont .referidbox {
+            margin-top: 20px;
+            margin-bottom: 20px;
+            width: 95%;
+            padding: 10px 20px;
+            border-radius: 10px;
+            background-color: #fff;
+            color: #030e12;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            box-shadow: 0px 0px 50px #030e122a, inset 0px 0px 10px #030e121f;
+            border: 5px solid #fff;
+        }
+
+        .cont .pin {
+            display: flex;
+            width: 100%;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+    .pin input {
+        width: 100%;
+        border: none;
+        padding: 10px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        outline: none;
+        font-size: 16px;
+        color: #030e1263;
+        box-shadow: 0px 0px 5px #adadad;
+    }
+
+    .pin p {
+        font-size: 14px;
+        text-align: center;
+    }
+
+    .optCards {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+        .optCards .collections,
+        .customs,
+        .delivery,
+        .collectingempty,
+        .other {
+            width: 500px;
+            height: 220px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px;
+            position: relative;
+            border-radius: 10px;
+            transition: all .5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            box-shadow: 0px 0px 50px #030e122a, inset 0px 0px 10px #030e121f;
+            background-color: #fff;
+            border: 5px solid #fff;
+        }
+
+            .optCards .collections::before,
+            .customs::before,
+            .delivery::before,
+            .collectingempty::before,
+            .other::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: #170422;
+                clip-path: circle(15% at left 0%);
+                border-radius: 10px;
+                transition: all .5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            }
+
+            .optCards .collections::before,
+            .delivery::before {
+                background: linear-gradient(#f6013e, #f63a01);
+            }
+
+
+
+            .optCards .collections::after,
+            .customs::after,
+            .delivery::after,
+            .collectingempty::after,
+            .other::after {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(#01bdf6, #012ef6);
+                border-radius: 10px;
+                clip-path: circle(15% at right 100%);
+                transition: all .5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            }
+
+            .optCards .collections::after,
+            .delivery::after {
+                background: #170422;
+            }
+
+
+            .optCards .collections:hover::after,
+            .customs:hover::after,
+            .delivery:hover::after,
+            .collectingempty:hover::after,
+            .other:hover::after {
+                clip-path: circle(100% at right 100%);
+                transition: all .5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            }
+
+            .optCards .collections:hover::before,
+            .customs:hover::before,
+            .delivery:hover::before,
+            .collectingempty:hover::before,
+            .other:hover::before {
+                clip-path: circle(100% at left 0%);
+                transition: all .5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            }
+
+            .optCards .collections:hover .stagebtn,
+            .customs:hover .stagebtn,
+            .delivery:hover .stagebtn,
+            .collectingempty:hover .stagebtn,
+            .other:hover .stagebtn {
+                color: #eff5ff;
+            }
+
+            .optCards .collections:hover,
+            .customs:hover,
+            .delivery:hover,
+            .collectingempty:hover,
+            .other:hover {
+                transform: scale(1.05);
+            }
+
+
+    /* Alerts */
+
+    /* Alerts */
+
+    .alert {
+        width: 90%;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        border: 5px solid #fff;
+        border-radius: 10px;
+        z-index: 10;
+        box-shadow: inset 0px 0px 10px #030e122a;
+        background-color: red;
+        margin-top: 200px;
+        opacity: 0;
+        z-index: 999 !important;
+        backdrop-filter: none !important;
+        transition: .8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+
+    .unlockalert {
+        transition: .8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        animation: unlockalert 1s .1s forwards cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+
+    @@keyframes unlockalert {
+        0% {
+            margin-top: 200px;
+            opacity: 0;
+        }
+
+        100% {
+            margin-top: 0px;
+            opacity: 1;
+        }
+    }
+
+
+    .lockalert {
+        transition: .8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        animation: lockalert 1s forwards cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+
+    @@keyframes lockalert {
+        0% {
+            margin-top: 0px;
+            opacity: 1;
+        }
+
+        100% {
+            margin-top: 300px;
+            opacity: 0;
+        }
+    }
+
+
+    .alert .errormsg {
+        font-size: 13px;
+        color: #fff;
+        padding: 10px 40px 10px 10px;
+        text-align: center;
+    }
+
+    .alert .fa-exclamation,
+    .fa-times {
+        padding: 5px;
+        font-size: 20px;
+        color: #000;
+        background-color: #fff;
+        border-top-right-radius: 3px;
+        cursor: pointer;
+    }
+
+    .alert .fa-exclamation {
+        font-size: 30px;
+        padding: 10px 20px;
+        border-radius: 50%;
+        margin-left: 10px;
+        color: red;
+    }
+
+    .fa-times {
+        position: absolute;
+        right: 0;
+        top: 0;
+        text-align: center;
+    }
+
+    .alertlayer {
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #030e124f;
+        display: flex;
+        align-items: flex-start;
+        padding-top: 50px;
+        justify-content: center;
+        z-index: -1;
+        display: none;
+        opacity: 0;
+        transition: .3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+
+    .unlockalertlayer {
+        opacity: 1;
+        z-index: 10;
+        display: flex;
+        transition: .3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        animation: unlockalertlayer 1s forwards cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+
+    @@keyframes unlockalertlayer {
+        0% {
+            z-index: -1;
+            display: none;
+            opacity: 0;
+        }
+
+        100% {
+            z-index: 10;
+            display: flex;
+            opacity: 1;
+        }
+    }
+
+    .lockalertlayer {
+        z-index: 10;
+        display: flex;
+        opacity: 1;
+        transition: .3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        animation: lockalertlayer 1s forwards cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+
+    @@keyframes lockalertlayer {
+        0% {
+            z-index: 10;
+            display: flex;
+            opacity: 1;
+        }
+
+        100% {
+            z-index: -1;
+            display: none;
+            opacity: 0;
+        }
+    }
+
+
+    .nav.blur,
+    .cont.blur {
+        filter: blur(2px);
+    }
+</style>
+
+<body>
+
+
+    <div class="alertlayer">
+
+        <div class="alert">
+
+            <i class="fas fa-exclamation"></i>
+
+            <p class="errormsg">
+            </p>
+
+            <i class="fas fa-times "></i>
+
+        </div>
+
+    </div>
+
+    <div class="nav">
+
+        <div class="logo">
+            <img src="https://cameraappv3.azurewebsites.net/assets/images/logo.png" width="150px">
+        </div>
+
+    </div>
+
+
+
+    <div class="cont">
+
+        <div class="referidbox">
+
+            <div class="pin">
+                <input type="number" name="pin" id="pin" value="789000" readonly>
+            </div>
+            <button class="btn1" id="submit">
+                REFERENCE
+                NUMBER
+            </button>
+
+        </div>
+
+        <p>Please click on the appropriate stage to submit photos</p>
+
+        <div class="optCards">
+
+            <form action="/CheckStage/Collection" class="collections">
+                <button class="stagebtn" type="submit">COLLECTIONS</button>
+            </form>
+            <form action="/CheckStage/Customs" class="customs"> <button class="stagebtn" type="submit">CUSTOMS</form></button>
+            <form action="/CheckStage/Delivery" class="delivery"> <button class="stagebtn" type="submit">DELIVERY</form></button>
+            <form action="/CheckStage/Collecting-The-Empties" class="collectingempty"><button class="stagebtn" type="submit">COLLECTING THE EMPTIES</form>
+            </button>
+            <form action="/CheckStage/Other" class="other"> <button class="stagebtn" type="submit">OTHERS</form></button>
+
+        </div>
+
+    </div>
+
+
+</body>
+
+<script src="/jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+
+<script>
+
+    $(document).ready(function () {
+
+        $('.fa-times').click(function () {
+            $('.alert').removeClass('unlockalert')
+            $('.alert').addClass('lockalert')
+            $('.alertlayer').removeClass('unlockalertlayer')
+            $('.alertlayer').addClass('lockalertlayer')
+            $('.nav,.cont').removeClass('blur')
+            window.location.reload(true);
+        })
+
+        // checking online or offline
+
+        $('a,button').click(function () {
+
+            var network = navigator.onLine;
+
+            if (network !== true) {
+                $('.alert').addClass('unlockalert')
+                $('.alertlayer').addClass('unlockalertlayer')
+                $('.alertlayer').removeClass('lockalertlayer')
+                $('.alert').removeClass('lockalert')
+                $('.alert>.errormsg').html('<h2>Please check your internet connection !"</h2>')
+                $('.nav,.cont').addClass('blur')
+
+                return false;
+            }
+            else {
+                return true;
+            }
+        })
+
+
+
+    })
+</script>
+
+
+
+</html>
