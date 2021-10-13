@@ -55,7 +55,7 @@ namespace TruckAppMVC
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Truckapp}/{action=IndexPage}");
+                    pattern: "IndexPage.cshtml");
             });
         }
     }
